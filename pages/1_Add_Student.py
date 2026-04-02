@@ -41,7 +41,8 @@ st.subheader("Current Students")
 try:
     conn = get_connection()
     cur = conn.cursor()
-    cur.execute("SELECT id, name, email FROM students10 ORDER BY name;")
+    # Updated to sort by ID in ascending order    
+    cur.execute("SELECT id, name, email FROM students10 ORDER BY id;")
     students = cur.fetchall()
     cur.close()
     conn.close()
