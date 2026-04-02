@@ -13,8 +13,12 @@ with st.form("add_student_form"):
     email = st.text_input("Student Email")
     submitted = st.form_submit_button("Add Student")
 
-    if submitted:
-        if name and email:
+     if submitted:
+        if not name or not email:
+            st.warning("Please fill in all fields.")
+        elif "@" not in email or "." not in email.split("@")[-1]:
+            st.warning("Please enter a valid email address.")
+        else:
             try:
                 conn = get_connection()
                 cur = conn.cursor()
@@ -30,8 +34,6 @@ with st.form("add_student_form"):
                 st.error("⚠️ A student with that email already exists.")
             except Exception as e:
                 st.error(f"Error: {e}")
-        else:
-            st.warning("Please fill in both fields.")
 
 st.markdown("---")
 st.subheader("Current Students")
