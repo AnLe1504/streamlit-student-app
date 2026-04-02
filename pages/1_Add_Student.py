@@ -13,7 +13,7 @@ with st.form("add_student_form"):
     email = st.text_input("Student Email")
     submitted = st.form_submit_button("Add Student")
 
-     if submitted:
+    if submitted:
         if not name or not email:
             st.warning("Please fill in all fields.")
         elif "@" not in email or "." not in email.split("@")[-1]:
