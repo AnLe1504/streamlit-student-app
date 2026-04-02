@@ -38,14 +38,15 @@ st.subheader("Current Courses")
 try:
     conn = get_connection()
     cur = conn.cursor()
-    cur.execute("SELECT id, course_name FROM courses10 ORDER BY course_name;")
-    courses = cur.fetchall()
+    # Updated to sort by ID in ascending order
+    cur.execute("SELECT id, name, email FROM students10 ORDER BY id;")
+    students = cur.fetchall()
     cur.close()
     conn.close()
 
-    if courses:
-        st.table([{"ID": c[0], "Course Name": c[1]} for c in courses])
+    if students:
+        st.table([{"ID": s[0], "Name": s[1], "Email": s[2]} for s in students])
     else:
-        st.info("No courses yet.")
+        st.info("No students yet.")
 except Exception as e:
     st.error(f"Error: {e}")
